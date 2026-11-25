@@ -7,7 +7,6 @@ import {
   Card,
   Table,
   Button,
-  Spinner,
 } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
@@ -193,10 +192,7 @@ function Dashboard() {
     1
   );
 
-  // RECENT EXPENSES
-  const recentExpenses = [...expenses]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 5);
+
 
   // LOADING
   if (loading) {
