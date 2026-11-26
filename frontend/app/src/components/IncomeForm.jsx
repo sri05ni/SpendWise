@@ -9,7 +9,7 @@ import {
   Alert
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import API from "../services/api";
 
 function IncomeForm() {
   const navigate = useNavigate();
@@ -43,28 +43,20 @@ function IncomeForm() {
     try {
       const token = sessionStorage.getItem("token");
 
-      const response = await fetch(
-        "http://localhost:5000/api/income/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            ...income,
-            amount: Number(income.amount)
-          })
-        }
-      );
+       await API.post(
+            "/api/income/",
+            {
+                ...income,
+                amount: Number(income.amount)
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to add income");
-      }
-
-      navigate("/income");
+        navigate("/dashboard");
 
     } catch (err) {
       setError(err.message || "Something went wrong");
