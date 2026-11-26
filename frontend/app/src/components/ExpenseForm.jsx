@@ -42,18 +42,11 @@ function ExpenseForm() {
     try {
       const token = sessionStorage.getItem("token");
 
-      const response = await API.post(
-        "/api/expenses/",
-        {
-          ...expense,
-          amount: Number(expense.amount),
+      await API.post("/api/expenses/", expenseData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      });
 
       // Expense added successfully
       navigate("/dashboard");
