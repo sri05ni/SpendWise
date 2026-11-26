@@ -33,29 +33,29 @@ function ExpenseForm() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setError("");
-    setLoading(true);
+  setError("");
+  setLoading(true);
 
-    try {
-      const token = sessionStorage.getItem("token");
+  try {
+    const token = sessionStorage.getItem("token");
 
-      await API.post("/api/expenses/", expenseData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    await API.post("/api/expenses/", expense, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      // Expense added successfully
-      navigate("/dashboard");
-    } catch (err) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Expense added successfully
+    navigate("/dashboard");
+  } catch (err) {
+    setError(err.message || "Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="expense-page">
