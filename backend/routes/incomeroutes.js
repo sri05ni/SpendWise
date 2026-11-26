@@ -8,7 +8,7 @@ const {
   createIncome,
   updateIncome,
   deleteIncome
-} = require("../Controllers/incomeController");
+} = require("../controllers/incomeController");
 
 // Protect all income routes
 router.use(protect);
